@@ -1,0 +1,301 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #eef2f7;
+  color: #1f2937;
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- Нэвтрэх хуудас ---------- */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.card h1 { margin: 0 0 24px; font-size: 1.5rem; text-align: center; }
+
+label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+input:focus { outline: 2px solid #2563eb; border-color: transparent; }
+
+#login-btn {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#login-btn:hover { background: #1d4ed8; }
+#login-btn:disabled { background: #94a3b8; cursor: wait; }
+
+.message { min-height: 1.2em; margin: 14px 0 0; text-align: center; font-size: 0.9rem; color: #dc2626; }
+
+/* ---------- Админ хэсэг ---------- */
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: #1e293b;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 12px;
+}
+
+.brand { font-weight: 700; font-size: 1.15rem; padding: 0 12px 20px; color: #fff; }
+
+.menu { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+.menu button,
+.logout {
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.menu button:hover { background: #334155; }
+.menu button.active { background: #2563eb; color: #fff; font-weight: 600; }
+
+.logout { color: #fca5a5; margin-top: 12px; }
+.logout:hover { background: #3f1d24; }
+
+.content { flex: 1; min-width: 0; padding: 28px 32px; }
+.content h1 { margin: 0 0 24px; font-size: 1.6rem; }
+
+/* 4 карт */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label { font-size: 0.85rem; color: #64748b; margin-bottom: 8px; }
+.stat-value { font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat-card.warn .stat-value { color: #d97706; }
+
+/* Хүснэгт */
+.panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.panel h2 { margin: 0 0 14px; font-size: 1.1rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+th { color: #64748b; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Удахгүй / Тун удахгүй */
+.placeholder {
+  background: #fff;
+  border-radius: 12px;
+  padding: 60px 24px;
+  text-align: center;
+  color: #64748b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.placeholder .big { font-size: 1.8rem; font-weight: 700; color: #1f2937; margin-bottom: 8px; }
+
+.muted { color: #64748b; }
+.error-text { color: #dc2626; }
+
+/* ---------- CRUD: хайлт, товч, цонх ---------- */
+.toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbar .search { flex: 1; min-width: 180px; margin: 0; }
+
+.btn {
+  padding: 9px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f2937;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover { background: #f1f5f9; }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+.btn-primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-danger { color: #dc2626; border-color: #fecaca; }
+.btn-danger:hover { background: #fef2f2; }
+.modal-buttons .btn-danger { background: #dc2626; border-color: #dc2626; color: #fff; }
+.modal-buttons .btn-danger:hover { background: #b91c1c; }
+.btn-small { padding: 5px 10px; font-size: 0.82rem; }
+.btn-success { color: #15803d; border-color: #bbf7d0; }
+.btn-success:hover { background: #f0fdf4; }
+
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-gray { background: #f1f5f9; color: #475569; }
+
+.toolbar .filter { width: auto; margin: 0; }
+.toast-error { background: #dc2626; }
+
+.count { margin: 0 0 8px; font-size: 0.85rem; }
+td.actions { text-align: right; }
+td.actions .btn + .btn { margin-left: 6px; }
+tr.highlight td { animation: flash 2s ease-out; }
+@keyframes flash { from { background: #dbeafe; } to { background: transparent; } }
+
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.modal {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  width: min(440px, calc(100vw - 32px));
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.modal::backdrop { background: rgba(15, 23, 42, 0.45); }
+.modal-form { padding: 24px; }
+.modal-form h2 { margin: 0 0 18px; font-size: 1.2rem; }
+.modal-form p { line-height: 1.5; }
+.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.form-error { min-height: 1em; margin: 0 0 8px; font-size: 0.9rem; }
+
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #16a34a;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Утсан дээр: цэс дээд талд хэвтээ болно */
+@media (max-width: 760px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; padding: 12px 16px; }
+  .brand { padding: 0 0 10px; }
+  .menu { flex-direction: row; overflow-x: auto; gap: 6px; padding-bottom: 4px; }
+  .logout { margin-top: 8px; align-self: flex-start; }
+  .content { padding: 20px 16px; }
+}
+
+/* ---------- Эрэлт таамаглах ---------- */
+.small { font-size: 0.8rem; }
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.forecast-form .btn { width: 100%; padding: 11px; }
+
+.result-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.result-value {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #2563eb;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  margin: 8px 0;
+}
+
+.demand-table td { vertical-align: middle; }
+.demand-table td div.small { margin-top: 2px; }
+
+.bar-cell { display: flex; align-items: center; gap: 8px; min-width: 120px; }
+.bar-track { flex: 0 0 56px; height: 10px; border-radius: 5px; background: #f1f5f9; overflow: hidden; }
+.bar { display: block; height: 100%; border-radius: 5px; }
+.bar-actual { background: #2563eb; }
+.bar-predicted { background: #f59e0b; }
+
+.legend { display: flex; gap: 16px; margin: -6px 0 12px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+
+.diff-up { color: #15803d; font-weight: 600; }
+.diff-down { color: #dc2626; font-weight: 600; }
+
+@media (max-width: 760px) {
+  .forecast-grid { grid-template-columns: 1fr; }
+}
+
+/* Урт нэрүүд мөр шилжинэ → хүснэгт панелиас хальж, баруун багана тасрахгүй */
+.demand-table td:nth-child(2),
+.demand-table td:nth-child(5) { white-space: normal; min-width: 140px; }
+.demand-table th { white-space: normal; }
+.bar-cell { min-width: 90px; }
+
+.stat-value { white-space: nowrap; }

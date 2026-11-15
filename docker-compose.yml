@@ -1,0 +1,52 @@
+# Travel AI — бүх систем нэг командаар: db + backend + frontend
+# Нууц утгууд (нууц үг, JWT түлхүүр, EC2 IP) энд бичигдэхгүй — хажуудах .env файлаас ${...}-ээр орж ирнэ.
+
+services:
+
+  # ---------- 1. Өгөгдлийн сан ----------
+  db:
+    image: postgres:16                          # PostgreSQL 16 албан ёсны image
+    restart: unless-stopped                     # Унтарвал (эсвэл сервер дахин асвал) өөрөө асна
+    environment:
+      POSTGRES_USER: student                    # Сангийн хэрэглэгч
+      POSTGRES_DB: travel                       # Анх асахад үүсгэх сангийн нэр
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}   # Нууц үг — .env файлаас
+    volumes:
+      - pgdata:/var/lib/postgresql/data         # Өгөгдлийг контейнер устсан ч хадгална
+      - ./synthetic_data.sql:/docker-entrypoint-initdb.d/01_synthetic_data.sql:ro  # Анх асахад (сан хоосон үед) автоматаар ачаална
+    healthcheck:                                # Сан бэлэн болсон эсэхийг шалгана
+      test: ["CMD-SHELL", "pg_isready -U student -d travel"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    # ports: хэсэг ЗОРИУД байхгүй → 5432 порт гадагш нээгдэхгүй, зөвхөн backend хандана
+
+  # ---------- 2. Backend (FastAPI) ----------
+  backend:
+    build: ./travel-backend                     # travel-backend/Dockerfile-аас image бүтээнэ
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy              # Сан бэлэн болсны ДАРАА асна
+    environment:
+      DATABASE_URL: postgresql://student:${POSTGRES_PASSWORD}@db:5432/travel  # "db" = дээрх сангийн service-ийн нэр
+      ALLOWED_ORIGINS: http://${EC2_IP}         # Зөвхөн frontend-ийн хаягаас хүсэлт зөвшөөрнө (CORS)
+      JWT_SECRET: ${JWT_SECRET}                 # Токены нууц түлхүүр — .env файлаас
+      JWT_EXPIRE_MINUTES: "60"                  # Нэвтрэлт 60 минут хүчинтэй
+      MODEL_PATH: demand_model.joblib           # Эрэлт таамаглах загвар (image дотор байгаа)
+    ports:
+      - "8000:8000"                             # Хөтөч backend руу шууд хандана (config.js → :8000)
+
+  # ---------- 3. Frontend (nginx) ----------
+  frontend:
+    image: nginx:alpine                         # Жижиг, хурдан вэб сервер
+    restart: unless-stopped
+    depends_on:
+      - backend
+    volumes:
+      - ./travel-frontend:/usr/share/nginx/html:ro  # HTML/CSS/JS файлуудыг nginx-ээр үйлчилнэ (зөвхөн уншина)
+    ports:
+      - "80:80"                                 # http://EC2_IP гэж нээхэд хуудас гарна
+
+volumes:
+  pgdata:                                       # Сангийн өгөгдөл хадгалах нэртэй volume

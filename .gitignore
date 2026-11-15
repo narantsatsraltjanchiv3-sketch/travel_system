@@ -1,0 +1,15 @@
+# ---- Нууц тохиргоо: GitHub-д ХЭЗЭЭ Ч орохгүй ----
+.env
+.env.*
+!.env.example
+
+# ---- Python-ийн түр файлууд ----
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# ---- macOS-ийн түр файл ----
+.DS_Store
+
+# АНХААР: demand_model.joblib-ийг энд БҮҮ нэм — загвар GitHub-д заавал орно

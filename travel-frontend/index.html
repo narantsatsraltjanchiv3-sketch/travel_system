@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аяллын админ</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Нэвтрэх хуудас -->
+  <div id="login-page" class="login-page">
+    <main class="card">
+      <h1>Админ нэвтрэх</h1>
+      <form id="login-form">
+        <label for="email">Имэйл</label>
+        <input type="email" id="email" required autocomplete="username">
+
+        <label for="password">Нууц үг</label>
+        <input type="password" id="password" required autocomplete="current-password">
+
+        <button type="submit" id="login-btn">Нэвтрэх</button>
+      </form>
+      <p id="message" class="message" role="alert"></p>
+    </main>
+  </div>
+
+  <!-- Нэвтэрсний дараах хэсэг -->
+  <div id="app" class="app" hidden>
+    <aside class="sidebar">
+      <div class="brand">Аяллын админ</div>
+      <nav id="menu" class="menu">
+        <button type="button" data-page="dashboard" class="active">Хяналт</button>
+        <button type="button" data-page="tours">Аялал</button>
+        <button type="button" data-page="bookings">Захиалга</button>
+        <button type="button" data-page="customers">Үйлчлүүлэгч</button>
+        <button type="button" data-page="guides">Хөтөч</button>
+        <button type="button" data-page="forecast">Эрэлт таамаглах</button>
+        <button type="button" data-page="facebook">Facebook</button>
+      </nav>
+      <button type="button" id="logout-btn" class="logout">Гарах</button>
+    </aside>
+
+    <main class="content">
+      <h1 id="page-title">Хяналт</h1>
+      <div id="page-body"></div>
+    </main>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="api.js"></script>
+  <script src="crud.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

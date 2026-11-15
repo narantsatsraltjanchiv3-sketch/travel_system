@@ -1,0 +1,12 @@
+# Нууц тохиргоо image-д хэзээ ч орохгүй — AWS дээр орчны хувьсагчаар өгнө
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+Dockerfile
+.dockerignore
